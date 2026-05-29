@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { ProductSwatch, Badge } from '@/components/ui'
 import { money, totalStock, TYPE_LABEL } from '@/lib/data'
