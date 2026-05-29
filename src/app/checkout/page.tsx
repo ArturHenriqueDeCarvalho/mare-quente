@@ -46,16 +46,16 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div style={{ maxWidth: 1000, margin: '0 auto', padding: '24px 28px 64px' }}>
-      <button className="btn btn-text" onClick={() => router.push('/carrinho')} style={{ paddingLeft: 0, marginBottom: 12 }}>
+    <div className="checkout-container">
+      <button className="btn btn-text back-link" onClick={() => router.push('/carrinho')} style={{ paddingLeft: 0, marginBottom: 12 }}>
         <ArrowLIcon size={18} /> Voltar à sacola
       </button>
       
-      <form onSubmit={handleCheckout} style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 32, alignItems: 'start' }}>
+      <form onSubmit={handleCheckout} className="grid-checkout">
         <div className="col" style={{ gap: 22 }}>
           <div>
             <h2 style={{ fontSize: 22, marginBottom: 14, fontFamily: 'var(--font-display)' }}>Dados de entrega</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+            <div className="grid-split" style={{ gap: 14 }}>
               <Field label="Nome completo"><input required className="input" defaultValue="Larissa Mendes" /></Field>
               <Field label="CPF"><input required className="input" placeholder="000.000.000-00" /></Field>
               <Field label="CEP"><input required className="input" placeholder="00000-000" /></Field>

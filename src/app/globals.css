@@ -261,3 +261,93 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; margin: 0; 
 .center { align-items: center; justify-content: center; }
 .scrollbar::-webkit-scrollbar { width: 10px; height: 10px; }
 .scrollbar::-webkit-scrollbar-thumb { background: var(--sand-300); border-radius: 999px; border: 2px solid var(--sand-50); }
+
+/* ============================================================
+   RESPONSIVIDADE (MOBILE-FRIENDLY)
+   ============================================================ */
+.grid-catalog {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.grid-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.grid-cart {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.grid-checkout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Utilitários mobile hiding */
+.mobile-hidden { display: block; }
+.mobile-only { display: none; }
+
+/* Contêiner da página */
+.page-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px 64px;
+}
+
+.cart-container, .checkout-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 28px 64px;
+}
+
+/* Quebras de responsividade */
+@media (max-width: 1024px) {
+  .grid-catalog { grid-template-columns: repeat(3, 1fr); }
+  .grid-split { gap: 32px; }
+  .grid-cart, .grid-checkout { gap: 24px; }
+}
+
+@media (max-width: 768px) {
+  .grid-catalog { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .grid-split { grid-template-columns: 1fr; gap: 32px; }
+  .grid-cart { grid-template-columns: 1fr; gap: 32px; }
+  .grid-checkout { grid-template-columns: 1fr; gap: 32px; }
+  
+  .page-container { padding: 0 16px 48px; }
+  .cart-container, .checkout-container { padding: 16px 16px 48px; }
+  
+  .mobile-hidden { display: none !important; }
+  .mobile-only { display: block !important; }
+
+  /* Reduzir títulos e headers */
+  h1 { font-size: var(--fs-h2) !important; }
+  h2 { font-size: var(--fs-h3) !important; }
+
+  /* Navbar padding e busca */
+  .nav-header { padding: 14px 16px !important; gap: 12px !important; }
+  
+  /* Filtros com overflow lateral */
+  .filters-nav {
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap !important;
+  }
+  .filters-nav::-webkit-scrollbar { display: none; }
+}
+
+@media (max-width: 480px) {
+  .grid-catalog { grid-template-columns: 1fr; }
+  /* Ajuste do layout hero para mobile */
+  .hero-banner { padding: 32px 24px !important; margin: 16px 0 24px !important; }
+  .hero-banner h1 { font-size: 32px !important; }
+}

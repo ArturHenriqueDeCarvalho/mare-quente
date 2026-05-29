@@ -58,12 +58,12 @@ export default function ProductPage() {
   }
 
   return (
-    <div style={{ maxWidth: 1180, margin: '0 auto', padding: '24px 28px 64px' }}>
-      <button className="btn btn-text" onClick={() => router.push('/?filter=tudo')} style={{ paddingLeft: 0, marginBottom: 16 }}>
+    <div className="page-container">
+      <button className="btn btn-text back-link" onClick={() => router.push('/?filter=tudo')}>
         <ArrowLIcon size={18} /> Voltar à loja
       </button>
       
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
+      <div className="grid-split">
         <ProductSwatch grad={p.grad} type={p.type} h={520} radius="var(--r-xl)" />
         
         <div>

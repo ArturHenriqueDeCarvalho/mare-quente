@@ -24,7 +24,7 @@ export default function CartPage() {
   const total = subtotal * 0.9
 
   return (
-    <div style={{ maxWidth: 1000, margin: '0 auto', padding: '24px 28px 64px', display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 32, alignItems: 'start' }}>
+    <div className="cart-container grid-cart">
       <div>
         <h1 style={{ fontSize: 30, marginBottom: 18, fontFamily: 'var(--font-display)' }}>Sua sacola</h1>
         <div className="col" style={{ gap: 12 }}>
