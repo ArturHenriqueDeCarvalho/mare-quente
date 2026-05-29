@@ -24,12 +24,12 @@ export function Navbar() {
 
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 20, background: 'var(--glass)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--line)' }}>
-      <div style={{ maxWidth: 1180, margin: '0 auto', padding: '14px 28px', display: 'flex', alignItems: 'center', gap: 28 }}>
-        <Link href="/?filter=tudo" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div className="nav-header" style={{ maxWidth: 1180, margin: '0 auto', padding: '14px 28px', display: 'flex', alignItems: 'center', gap: 28 }}>
+        <Link href="/" style={{ display: 'flex', color: 'inherit', textDecoration: 'none', alignItems: 'center', gap: 8 }}>
           <StoreIcon size={32} color="var(--magenta)" />
           <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--text-xl)', color: 'var(--ink)' }}>Maré Quente</span>
         </Link>
-        <nav className="row" style={{ gap: 6, marginLeft: 8 }}>
+        <nav className="row mobile-hidden" style={{ gap: 6, marginLeft: 8 }}>
           {filters.map(f => (
             <Link key={f.id} href={`/?filter=${f.id}`} style={{
               background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: 15, padding: '8px 12px', borderRadius: 'var(--r-pill)',
@@ -41,7 +41,7 @@ export function Navbar() {
           ))}
         </nav>
         <div className="grow" />
-        <div className="input-icon" style={{ width: 220 }}>
+        <div className="input-icon mobile-hidden" style={{ width: 220 }}>
           <SearchIcon size={18} />
           <input className="input" placeholder="Buscar peças..." style={{ height: 40, borderRadius: 'var(--r-pill)' }} />
         </div>
