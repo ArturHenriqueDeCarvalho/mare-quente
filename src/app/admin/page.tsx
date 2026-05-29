@@ -1,7 +1,44 @@
-import React from 'react'
-import { ChartIcon, CartIcon, TagIcon, UsersIcon } from '@/components/ui'
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import { ChartIcon, CartIcon, TagIcon, UsersIcon, Badge } from '@/components/ui'
+import { supabase } from '@/lib/supabase'
 
 export default function AdminDashboard() {
+  const [stats, setStats] = useState({ revenue: 0, orders: 0, products: 0, customers: 0 })
+  const [recentOrders, setRecentOrders] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadDashboard() {
+      setLoading(true)
+      
+      // Fetch products count
+      const { count: productsCount } = await supabase.from('products').select('*', { count: 'exact', head: true })
+      
+      // Fetch users count
+      const { count: usersCount } = await supabase.from('users').select('*', { count: 'exact', head: true })
+
+      // Fetch orders count & total
+      const { data: orders } = await supabase.from('orders').select('*').order('created_at', { ascending: false })
+      
+      const ordersCount = orders?.length || 0
+      const revenue = orders?.reduce((sum, o) => sum + Number(o.total), 0) || 0
+
+      setStats({
+        revenue,
+        orders: ordersCount,
+        products: productsCount || 0,
+        customers: usersCount || 0
+      })
+
+      setRecentOrders(orders?.slice(0, 5) || [])
+      setLoading(false)
+    }
+    
+    loadDashboard()
+  }, [])
+
   return (
     <div className="col gap-6" style={{ padding: 'var(--sp-8)' }}>
       <header>
@@ -11,10 +48,10 @@ export default function AdminDashboard() {
 
       <div className="row gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
         {[
-          { label: 'Vendas (Mês)', value: 'R$ 14.250,00', icon: ChartIcon, tone: 'ok' },
-          { label: 'Pedidos', value: '42', icon: CartIcon, tone: 'info' },
-          { label: 'Produtos', value: '18', icon: TagIcon, tone: 'mag' },
-          { label: 'Clientes', value: '105', icon: UsersIcon, tone: 'warn' },
+          { label: 'Vendas', value: `R$ ${stats.revenue.toFixed(2).replace('.', ',')}`, icon: ChartIcon, tone: 'ok' },
+          { label: 'Pedidos', value: loading ? '...' : stats.orders, icon: CartIcon, tone: 'info' },
+          { label: 'Produtos', value: loading ? '...' : stats.products, icon: TagIcon, tone: 'mag' },
+          { label: 'Clientes', value: loading ? '...' : stats.customers, icon: UsersIcon, tone: 'warn' },
         ].map((k, i) => (
           <div key={i} className="card card-p col gap-3">
             <div className="row" style={{ justifyContent: 'space-between' }}>
@@ -30,28 +67,36 @@ export default function AdminDashboard() {
 
       <div className="card card-p-lg col gap-4">
         <h2 style={{ fontSize: 'var(--text-lg)' }}>Últimos Pedidos</h2>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Pedido</th>
-              <th>Cliente</th>
-              <th>Data</th>
-              <th>Total</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[1, 2, 3].map(i => (
-              <tr key={i}>
-                <td>#100{i}</td>
-                <td>Cliente {i}</td>
-                <td>Hoje, 14:{i}0</td>
-                <td>R$ 149,90</td>
-                <td><span className="badge badge-warn">Pendente</span></td>
+        {loading ? <p>Carregando...</p> : recentOrders.length === 0 ? <p className="muted">Nenhum pedido recente.</p> : (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Pedido</th>
+                <th>Cliente</th>
+                <th>Data</th>
+                <th>Total</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {recentOrders.map(o => (
+                <tr key={o.id}>
+                  <td>
+                    <span style={{ fontWeight: 600, fontFamily: 'monospace' }}>{o.id.split('-')[0]}</span>
+                  </td>
+                  <td>{o.customer_name}</td>
+                  <td>{new Date(o.created_at).toLocaleDateString('pt-BR')}</td>
+                  <td>R$ {Number(o.total).toFixed(2).replace('.', ',')}</td>
+                  <td>
+                    <Badge tone={o.status === 'pending' ? 'warn' : o.status === 'paid' ? 'ok' : 'info'}>
+                      {o.status}
+                    </Badge>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   )

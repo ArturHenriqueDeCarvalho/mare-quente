@@ -3,17 +3,18 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { GridIcon, TagIcon, CartIcon, GearIcon, LogoutIcon, ThemeToggle, StoreIcon } from '@/components/ui'
+import { GridIcon, TagIcon, CartIcon, GearIcon, LogoutIcon, ThemeToggle, StoreIcon, UsersIcon } from '@/components/ui'
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const { signOut } = useAuth()
+  const { signOut, appUser } = useAuth()
 
   const navItems = [
     { label: 'Dashboard', href: '/admin', icon: GridIcon },
     { label: 'Produtos', href: '/admin/produtos', icon: TagIcon },
     { label: 'Pedidos', href: '/admin/pedidos', icon: CartIcon },
+    ...(appUser?.role === 'admin' ? [{ label: 'Usuários', href: '/admin/usuarios', icon: UsersIcon }] : []),
     { label: 'Configurações', href: '/admin/configuracoes', icon: GearIcon },
   ]
 
