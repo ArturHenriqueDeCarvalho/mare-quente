@@ -5,6 +5,8 @@ import "./globals.css";
 
 import { Navbar } from '@/components/layout/Navbar'
 
+import { Suspense } from 'react'
+
 export const metadata: Metadata = {
   title: 'Maré Quente Biquínis',
   description: 'Loja oficial',
@@ -20,7 +22,9 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <CartProvider>
-            <Navbar />
+            <Suspense fallback={null}>
+              <Navbar />
+            </Suspense>
             {children}
           </CartProvider>
         </AuthProvider>

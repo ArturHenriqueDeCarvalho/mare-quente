@@ -5,7 +5,9 @@ import { Badge, ProductCard } from '@/components/ui'
 import { conjuntos, tops, bottoms } from '@/lib/data'
 import { useSearchParams, useRouter } from 'next/navigation'
 
-export default function Home() {
+import { Suspense } from 'react'
+
+function Catalog() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const filter = searchParams.get('filter') || 'tudo'
@@ -40,5 +42,13 @@ export default function Home() {
         {list.map(p => <ProductCard key={p.id} p={p} />)}
       </div>
     </div>
+  )
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <Catalog />
+    </Suspense>
   )
 }

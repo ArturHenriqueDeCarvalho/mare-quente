@@ -10,7 +10,7 @@ export function Navbar() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const { cartCount } = useCart()
+  const { totalItems: cartCount } = useCart()
 
   const currentFilter = searchParams.get('filter') || 'tudo'
   const isCatalog = pathname === '/'
