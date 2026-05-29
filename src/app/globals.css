@@ -1,0 +1,263 @@
+/* ============================================================
+   MARÉ QUENTE — Design System
+   Tema: Sunset praiano · vibrante · acolhedor
+   ============================================================ */
+
+:root {
+  /* ---- Cores de marca (extraídas da logo/gradiente sunset) ---- */
+  --mango:      #FF9A5B;   /* coral-manga (alto do gradiente)   */
+  --coral:      #FF7A6B;   /* coral quente                       */
+  --watermelon: #FF6F91;   /* rosa melancia                      */
+  --magenta:    #C42C6E;   /* magenta do caranguejo — PRIMÁRIA   */
+  --magenta-700:#A31E59;   /* magenta escura (hover/active)      */
+  --plum:       #4A1230;   /* ameixa profunda — tinta/texto      */
+  --peach:      #FFD3B0;   /* pêssego claro                      */
+  --shell:      #FFE7D6;   /* concha/areia clara                 */
+
+  /* ---- Gradientes ---- */
+  --grad-sunset: linear-gradient(135deg, #FF9A5B 0%, #FF6F91 48%, #D94C8E 100%);
+  --grad-sunset-soft: linear-gradient(140deg, #FBA87C 0%, #F79A9A 42%, #EE93B7 78%, #E0A6CE 100%);
+  --grad-dusk:   linear-gradient(160deg, #C42C6E 0%, #7A1745 100%);
+  --grad-glow:   radial-gradient(120% 120% at 0% 0%, #FFB877 0%, #FF6F91 45%, #C42C6E 100%);
+
+  /* ---- Neutros quentes ---- */
+  --sand-50:  #FFF8F3;
+  --sand-100: #FFF1E9;
+  --sand-200: #F8E4D8;
+  --sand-300: #ECD3C5;
+  --sand-400: #D8B9A9;
+
+  --ink:        #3A1220;   /* texto principal (vinho escuro)     */
+  --ink-2:      #6E4254;   /* texto secundário                   */
+  --ink-3:      #9C7585;   /* texto terciário / placeholder      */
+  --line:       #F0DCD0;   /* bordas suaves                      */
+  --line-2:     #E6CDBF;   /* bordas mais marcadas               */
+  --white:      #FFFFFF;
+
+  /* ---- Estados funcionais (afinados ao tema quente) ---- */
+  --success:    #18A06A;
+  --success-bg: #E3F6EC;
+  --warning:    #E08A1E;
+  --warning-bg: #FCEFD9;
+  --danger:     #E23D5C;
+  --danger-bg:  #FCE4E8;
+  --info:       #3B7BD4;
+  --info-bg:    #E5EFFB;
+
+  /* ---- Tipografia ---- */
+  --font-display: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body:    "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+  --fs-display: 56px;
+  --fs-h1: 40px;
+  --fs-h2: 30px;
+  --fs-h3: 22px;
+  --fs-lg: 18px;
+  --fs-md: 15px;
+  --fs-sm: 13px;
+  --fs-xs: 11px;
+
+  /* ---- Raios ---- */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+  --r-pill: 999px;
+
+  /* ---- Espaçamento (escala base 4) ---- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px;
+
+  /* ---- Sombras (quentes) ---- */
+  --sh-sm:  0 1px 2px rgba(74,18,48,.08);
+  --sh-md:  0 6px 18px -6px rgba(196,44,110,.20);
+  --sh-lg:  0 18px 40px -12px rgba(196,44,110,.28);
+  --sh-glow:0 10px 30px -8px rgba(255,111,145,.45);
+
+  /* superfície "vidro" de navs/topbars */
+  --glass: rgba(255,248,243,.85);
+  color-scheme: light;
+}
+
+/* ============================================================
+   TEMA ESCURO — redefine neutros, mantém a marca sunset
+   ============================================================ */
+[data-theme="dark"] {
+  --sand-50:  #150A10;   /* fundo da página            */
+  --sand-100: #271521;   /* hover / botão suave        */
+  --sand-200: #341C2B;
+  --sand-300: #472838;
+  --sand-400: #5E3749;
+
+  --ink:    #FBEDF3;     /* texto principal            */
+  --ink-2:  #D7B2C1;     /* texto secundário           */
+  --ink-3:  #A07E8C;     /* terciário / placeholder    */
+  --line:   #34202B;     /* bordas suaves              */
+  --line-2: #462C39;     /* bordas marcadas            */
+  --white:  #241320;     /* superfícies / cards        */
+
+  --plum:   #FBEDF3;     /* (usado como tinta em texto)*/
+
+  --success: #45D89C; --success-bg: rgba(69,216,156,.15);
+  --warning: #F4B65A; --warning-bg: rgba(244,182,90,.15);
+  --danger:  #FF6F86; --danger-bg:  rgba(255,111,134,.15);
+  --info:    #74A9F2; --info-bg:    rgba(116,169,242,.15);
+
+  --glass: rgba(21,10,16,.82);
+  --sh-sm:  0 1px 2px rgba(0,0,0,.4);
+  --sh-md:  0 6px 18px -6px rgba(0,0,0,.5);
+  --sh-lg:  0 18px 40px -12px rgba(0,0,0,.6);
+  color-scheme: dark;
+}
+[data-theme="dark"] .badge-mag { background: rgba(255,111,145,.18); color: #FF93B0; }
+[data-theme="dark"] .card { border-color: var(--line); }
+[data-theme="dark"] .btn-ghost { background: var(--white); }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--sand-50);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background .3s ease, color .3s ease;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; margin: 0; line-height: 1.1; letter-spacing: -0.01em; color: var(--ink); }
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-md);
+  border: none;
+  border-radius: var(--r-pill);
+  padding: 12px 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .2s ease, background .2s ease, opacity .2s;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1;
+}
+.btn:active { transform: translateY(1px) scale(.99); }
+.btn-primary { background: var(--grad-sunset); color: #fff; box-shadow: var(--sh-glow); }
+.btn-primary:hover { box-shadow: 0 14px 34px -8px rgba(255,111,145,.6); }
+.btn-solid { background: var(--magenta); color: #fff; }
+.btn-solid:hover { background: var(--magenta-700); }
+.btn-ghost { background: var(--white); color: var(--magenta); border: 1.5px solid var(--line-2); }
+.btn-ghost:hover { border-color: var(--magenta); background: var(--sand-50); }
+.btn-soft { background: var(--sand-100); color: var(--ink); }
+.btn-soft:hover { background: var(--sand-200); }
+.btn-text { background: transparent; color: var(--ink-2); padding: 8px 12px; }
+.btn-text:hover { color: var(--magenta); }
+.btn-lg { padding: 16px 30px; font-size: var(--fs-lg); }
+.btn-sm { padding: 8px 16px; font-size: var(--fs-sm); }
+.btn-icon { padding: 10px; border-radius: var(--r-pill); width: 42px; height: 42px; }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.btn-block { width: 100%; }
+
+/* ============================================================
+   INPUTS / CAMPOS
+   ============================================================ */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field > label { font-size: var(--fs-sm); font-weight: 600; color: var(--ink-2); }
+.input, .select, .textarea {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  color: var(--ink);
+  background: var(--white);
+  border: 1.5px solid var(--line-2);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  width: 100%;
+  transition: border-color .15s, box-shadow .15s;
+}
+.input::placeholder { color: var(--ink-3); }
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--watermelon);
+  box-shadow: 0 0 0 4px rgba(255,111,145,.16);
+}
+.textarea { resize: vertical; min-height: 90px; }
+.input-icon { position: relative; }
+.input-icon .input { padding-left: 42px; }
+.input-icon svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--ink-3); }
+.hint { font-size: var(--fs-xs); color: var(--ink-3); }
+
+/* ============================================================
+   BADGES / PÍLULAS
+   ============================================================ */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: var(--fs-xs); font-weight: 700; letter-spacing: .02em;
+  padding: 4px 10px; border-radius: var(--r-pill); text-transform: uppercase;
+  white-space: nowrap;
+}
+.badge-mag  { background: rgba(196,44,110,.12); color: var(--magenta); }
+.badge-ok   { background: var(--success-bg); color: var(--success); }
+.badge-warn { background: var(--warning-bg); color: var(--warning); }
+.badge-dang { background: var(--danger-bg); color: var(--danger); }
+.badge-info { background: var(--info-bg); color: var(--info); }
+.badge-soft { background: var(--sand-200); color: var(--ink-2); }
+
+/* pílulas de tamanho */
+.size-pill {
+  min-width: 44px; height: 44px; padding: 0 12px;
+  border-radius: var(--r-md); border: 1.5px solid var(--line-2);
+  background: var(--white); color: var(--ink); font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .15s; font-size: var(--fs-sm);
+}
+.size-pill:hover { border-color: var(--watermelon); }
+.size-pill.active { background: var(--magenta); color: #fff; border-color: var(--magenta); }
+.size-pill.out { opacity: .4; cursor: not-allowed; text-decoration: line-through; }
+
+/* ============================================================
+   CARDS / SUPERFÍCIES
+   ============================================================ */
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+}
+.card-pad { padding: var(--sp-6); }
+
+/* ============================================================
+   TABELAS
+   ============================================================ */
+.table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.table th {
+  text-align: left; font-weight: 700; color: var(--ink-3);
+  font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .04em;
+  padding: 12px 16px; border-bottom: 1px solid var(--line);
+}
+.table td { padding: 14px 16px; border-bottom: 1px solid var(--line); color: var(--ink); }
+.table tr:last-child td { border-bottom: none; }
+.table tbody tr { transition: background .12s; }
+.table tbody tr:hover { background: var(--sand-50); }
+
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+.muted { color: var(--ink-2); }
+.muted-3 { color: var(--ink-3); }
+.row { display: flex; align-items: center; gap: var(--sp-3); }
+.col { display: flex; flex-direction: column; }
+.between { justify-content: space-between; }
+.wrap { flex-wrap: wrap; }
+.grow { flex: 1; }
+.center { align-items: center; justify-content: center; }
+.scrollbar::-webkit-scrollbar { width: 10px; height: 10px; }
+.scrollbar::-webkit-scrollbar-thumb { background: var(--sand-300); border-radius: 999px; border: 2px solid var(--sand-50); }
