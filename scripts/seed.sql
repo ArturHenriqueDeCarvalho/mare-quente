@@ -24,3 +24,24 @@ INSERT INTO public.products (id, type, name, print, collection, gradient, price,
 ('dddddddd-dddd-dddd-dddd-dddddddddddd', 'set', 'Conjunto Pôr do Sol', 'Pôr do Sol', 'Verão 26', 'linear-gradient(150deg,#FF9A5B,#FF6F91,#C42C6E)', 159.9, true, '[]', '11111111-1111-1111-1111-111111111111', '77777777-7777-7777-7777-777777777777'),
 ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee', 'set', 'Conjunto Rosé', 'Rosé', 'Verão 26', 'linear-gradient(150deg,#FFC2D1,#FF6F91)', 144.9, true, '[]', '33333333-3333-3333-3333-333333333333', '99999999-9999-9999-9999-999999999999'),
 ('ffffffff-ffff-ffff-ffff-ffffffffffff', 'set', 'Conjunto Tropicália', 'Tropical', 'Tropicália', 'linear-gradient(150deg,#FFD36E,#FF7A6B,#D94C8E)', 189.9, true, '[]', '44444444-4444-4444-4444-444444444444', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa');
+
+-- 4. Criar Usuário Admin Inicial (Artur Carvalho)
+WITH new_user AS (
+  INSERT INTO auth.users (
+    instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at
+  ) VALUES (
+    '00000000-0000-0000-0000-000000000000',
+    uuid_generate_v4(),
+    'authenticated',
+    'authenticated',
+    'arturcaarvalho@gmail.com',
+    crypt('Mare-1234', gen_salt('bf')),
+    now(),
+    '{"provider":"email","providers":["email"]}',
+    '{"name":"Artur Carvalho"}',
+    now(),
+    now()
+  ) RETURNING id, email
+)
+INSERT INTO public.users (id, email, name, role, status)
+SELECT id, email, 'Artur Carvalho', 'admin', 'active' FROM new_user;
