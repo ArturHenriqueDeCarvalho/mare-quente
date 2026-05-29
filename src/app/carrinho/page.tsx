@@ -44,9 +44,9 @@ export default function CartPage() {
                 </div>
                 <div className="between row">
                   <div className="row" style={{ gap: 0, border: '1.5px solid var(--line-2)', borderRadius: 'var(--r-pill)', overflow: 'hidden' }}>
-                    <button onClick={() => updateQuantity(it.product.id, it.size, Math.max(1, it.qty - 1))} style={{ width: 32, height: 32, border: 'none', background: 'none', cursor: 'pointer', fontSize: 18, color: 'var(--ink-2)' }}>−</button>
+                    <button onClick={() => updateQuantity(it.product.id, Math.max(1, it.qty - 1), it.size)} style={{ width: 32, height: 32, border: 'none', background: 'none', cursor: 'pointer', fontSize: 18, color: 'var(--ink-2)' }}>−</button>
                     <span style={{ minWidth: 24, textAlign: 'center', fontWeight: 700 }}>{it.qty}</span>
-                    <button onClick={() => updateQuantity(it.product.id, it.size, it.qty + 1)} style={{ width: 32, height: 32, border: 'none', background: 'none', cursor: 'pointer', fontSize: 18, color: 'var(--ink-2)' }}>+</button>
+                    <button onClick={() => updateQuantity(it.product.id, it.qty + 1, it.size)} style={{ width: 32, height: 32, border: 'none', background: 'none', cursor: 'pointer', fontSize: 18, color: 'var(--ink-2)' }}>+</button>
                   </div>
                   <span style={{ fontWeight: 800, color: 'var(--magenta)' }}>{money(it.product.price * it.qty)}</span>
                 </div>
