@@ -1,7 +1,8 @@
 'use client'
 
 import React from 'react'
-import { ProductSwatch, Badge } from '@/components/ui'
+import { ProductSwatch } from './ProductSwatch'
+import { Badge } from './Badge'
 import { money, totalStock, TYPE_LABEL } from '@/lib/data'
 import { useRouter } from 'next/navigation'
 
