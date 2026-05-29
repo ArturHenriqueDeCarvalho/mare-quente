@@ -5,12 +5,15 @@ import Link from 'next/link'
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
 import { SearchIcon, CartIcon, LogoutIcon, ThemeToggle, StoreIcon } from '@/components/ui'
 import { useCart } from '@/contexts/CartContext'
+import { useAuth } from '@/contexts/AuthContext'
+import { Avatar } from '@/components/ui'
 
 export function Navbar() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const { totalItems: cartCount } = useCart()
+  const { user, appUser, signOut } = useAuth()
 
   const currentFilter = searchParams.get('filter') || 'tudo'
   const isCatalog = pathname === '/'
@@ -50,7 +53,14 @@ export function Navbar() {
           <CartIcon size={20} />
           {cartCount > 0 && <span style={{ position: 'absolute', top: -4, right: -4, background: 'var(--magenta)', color: '#fff', fontSize: 11, fontWeight: 700, minWidth: 18, height: 18, borderRadius: 9, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 4px' }}>{cartCount}</span>}
         </button>
-        <button className="btn btn-icon btn-soft" title="Sair da loja"><LogoutIcon size={18} /></button>
+        {user && appUser ? (
+          <div className="row" style={{ gap: 8 }}>
+            <Avatar initial={appUser.name?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || 'U'} size={38} tone={appUser.role === 'admin' ? 'var(--magenta)' : appUser.role === 'seller' ? 'var(--info)' : 'var(--sand-300)'} />
+            <button className="btn btn-icon btn-soft mobile-hidden" onClick={signOut} title="Sair da conta"><LogoutIcon size={18} /></button>
+          </div>
+        ) : (
+          <button className="btn btn-ghost btn-sm" onClick={() => router.push('/login')}>Entrar</button>
+        )}
       </div>
     </header>
   )
