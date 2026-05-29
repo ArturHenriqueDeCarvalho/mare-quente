@@ -25,18 +25,22 @@ export interface Variant {
 
 export interface Product {
   id: string
-  type: ProductType
+  type: ProductType | 'conjunto'
   name: string
   collection: string
   print: string
   price: number
   photo_url?: string
   gradient?: string
-  published: boolean
-  variants: Variant[]
+  grad?: string
+  published?: boolean
+  variants?: Variant[]
+  sizes?: any[]
   top_ref?: string
   bottom_ref?: string
-  created_at: string
+  topRef?: string
+  bottomRef?: string
+  created_at?: string
 }
 
 export type OrderStatus = 'pending' | 'paid' | 'shipped' | 'delivered' | 'canceled'
