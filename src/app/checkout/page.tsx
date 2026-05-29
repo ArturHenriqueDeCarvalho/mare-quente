@@ -112,7 +112,7 @@ export default function CheckoutPage() {
           <div className="between row" style={{ fontSize: 20, fontWeight: 800, marginBottom: 16 }}>
             <span>Total</span><span style={{ color: 'var(--magenta)' }}>{money(total)}</span>
           </div>
-          <Button variant="primary" className="btn-block" icon="check" disabled={loading} onClick={() => {}}>
+          <Button variant="primary" className="btn-block" icon="CheckIcon" disabled={loading} onClick={() => {}}>
             {loading ? 'Redirecionando...' : 'Confirmar e pagar'}
           </Button>
           <p className="muted-3" style={{ fontSize: 11, textAlign: 'center', marginTop: 10 }}>

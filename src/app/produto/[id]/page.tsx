@@ -92,7 +92,7 @@ export default function ProductPage() {
           )}
 
           <div className="row" style={{ gap: 12, marginTop: 28 }}>
-            <Button variant="primary" size="lg" className="grow" icon="cart" disabled={!ready} onClick={add}>
+            <Button variant="primary" size="lg" className="grow" icon="CartIcon" disabled={!ready} onClick={add}>
               {ready ? 'Adicionar à sacola' : 'Selecione o tamanho'}
             </Button>
             <Button variant="ghost" size="lg" className="btn-icon" style={{ width: 56, height: 56 }}>
